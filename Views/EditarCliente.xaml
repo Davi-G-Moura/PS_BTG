@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CadastroClientes.Views.EditarCliente"
+             Title="{Binding Name}"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Salvar"
+                     Clicked="ToolbarItem_Clicked"
+                     Order="Primary"
+                     Priority="0" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20"
+                             VerticalOptions="FillAndExpand">
+            <Label Text="Nome do Cliente"
+                   FontSize="Medium"
+                   TextColor="{DynamicResource PrimaryTextColor}" />
+            <Entry x:Name="txt_nome"
+                   Text="{Binding Name}"
+                   Placeholder="Digite o nome"
+                   PlaceholderColor="{DynamicResource PlaceholderColor}"
+                   FontSize="Small"
+                   BackgroundColor="{DynamicResource EntryBackgroundColor}" />
+
+            <Label Text="Sobrenome do Cliente"
+                   FontSize="Medium"
+                   TextColor="{DynamicResource PrimaryTextColor}" />
+            <Entry x:Name="txt_sobrenome"
+                   Text="{Binding Lastname}"
+                   Placeholder="Digite o sobrenome"
+                   PlaceholderColor="{DynamicResource PlaceholderColor}"
+                   FontSize="Small"
+                   BackgroundColor="{DynamicResource EntryBackgroundColor}" />
+
+            <Label Text="Idade do Cliente"
+                   FontSize="Medium"
+                   TextColor="{DynamicResource PrimaryTextColor}" />
+            <Entry x:Name="txt_idade"
+                   Text="{Binding Age}"
+                   Placeholder="Digite a idade"
+                   PlaceholderColor="{DynamicResource PlaceholderColor}"
+                   Keyboard="Numeric"
+                   FontSize="Small"
+                   BackgroundColor="{DynamicResource EntryBackgroundColor}" />
+
+            <Label Text="Endereço do Cliente"
+                   FontSize="Medium"
+                   TextColor="{DynamicResource PrimaryTextColor}" />
+            <Entry x:Name="txt_endereco"
+                   Text="{Binding Address}"
+                   Placeholder="Digite o endereço"
+                   PlaceholderColor="{DynamicResource PlaceholderColor}"
+                   FontSize="Small"
+                   BackgroundColor="{DynamicResource EntryBackgroundColor}" />
+
+            <Button Text="Salvar"
+                    BackgroundColor="{DynamicResource ButtonBackgroundColor}"
+                    TextColor="{DynamicResource ButtonTextColor}"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    Padding="10"
+                    Clicked="ToolbarItem_Clicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

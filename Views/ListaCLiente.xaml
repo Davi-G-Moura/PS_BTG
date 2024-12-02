@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CadastroClientes.Views.ListaCLiente"
+             Title="Lista de CLientes">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Adicionar" Clicked="ToolbarItem_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <VerticalStackLayout>
+        <SearchBar x:Name="txt_search" Placeholder="Buscar Cliente" TextChanged="txt_search_TextChanged"></SearchBar>
+        
+        <ListView x:Name="lst_clientes" ItemSelected="lst_clientes_ItemSelected">
+            
+            <ListView.Header>
+                
+                <Grid ColumnDefinitions="*, *, *, *">
+                    <Label Grid.Column="0" Text="Nome" FontAttributes="Bold" FontSize="Small" TextColor="Black"></Label>
+                    <Label Grid.Column="1" Text="Sobrenome" FontAttributes="Bold" FontSize="Small" TextColor="Black"></Label>
+                    <Label Grid.Column="2" Text="Idade" FontAttributes="Bold" FontSize="Small" TextColor="Black"></Label>
+                    <Label Grid.Column="3" Text="Endereço" FontAttributes="Bold" FontSize="Small"></Label>
+                </Grid>
+                
+            </ListView.Header>
+            
+            <ListView.ItemTemplate>
+                
+                <DataTemplate>
+                    
+                    <ViewCell>
+                        
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Remover" Clicked="MenuItem_Clicked"></MenuItem>
+                        </ViewCell.ContextActions>
+                        
+                        <Grid ColumnDefinitions="*, *, *, *">
+                            <Label Grid.Column="0" Text="{Binding Name}"></Label>
+                            <Label Grid.Column="1" Text="{Binding Lastname}"></Label>
+                            <Label Grid.Column="2" Text="{Binding Age}"></Label>
+                            <Label Grid.Column="3" Text="{Binding Address}"></Label>
+                        </Grid>
+                        
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>
