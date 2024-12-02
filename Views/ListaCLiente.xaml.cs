@@ -1,63 +1,55 @@
-using System.Collections.ObjectModel;
 using CadastroClientes.Models;
+using CadastroClientes.ViewModels;
 
 namespace CadastroClientes.Views;
 
 public partial class ListaCLiente : ContentPage
 {
-    ObservableCollection<Cliente> lista = new ObservableCollection<Cliente>();
     public ListaCLiente()
     {
         InitializeComponent();
-
-        lst_clientes.ItemsSource = lista;
+        BindingContext = new ListaClienteViewModel();
+        MessagingCenter.Subscribe<EditarCliente>(this, "AtualizarLista", (sender) =>
+        {
+            AtualizarListaClientes();
+        });
+        MessagingCenter.Subscribe<NovoCliente>(this, "AtualizarLista", (sender) =>
+        {
+            AtualizarListaClientes();
+        });
     }
 
-    protected async override void OnAppearing()
+    private void AtualizarListaClientes()
+    {
+        var viewModel = (ListaClienteViewModel)BindingContext;
+        viewModel.CarregarClientes();
+    }
+
+    private void txt_search_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var viewModel = (ListaClienteViewModel)BindingContext;
+        viewModel.BuscarCommand.Execute(e.NewTextValue);
+    }
+
+    private async void lst_clientes_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        if (e.SelectedItem is Cliente cliente)
+        {
+            var viewModel = (ListaClienteViewModel)BindingContext;
+            viewModel.EditarCommand.Execute(cliente);
+        }
+    }
+
+    private async void ToolbarItem_Clicked(object sender, EventArgs e)
     {
         try
         {
-            lista.Clear();
-            List<Cliente> tmp = await App.Db.GetAll();
-
-            tmp.ForEach(i => lista.Add(i));
+            await Navigation.PushAsync(new Views.NovoCliente());
         }
         catch (Exception ex)
         {
             await DisplayAlert("Atenção", ex.Message, "OK");
         }
-    }
-
-    private void ToolbarItem_Clicked(object sender, EventArgs e)
-    {
-        try
-        {
-            Navigation.PushAsync(new Views.NovoCliente());
-
-        }
-        catch (Exception ex)
-        {
-            DisplayAlert("Atenção", ex.Message, "OK");
-        }
-    }
-
-    private async void txt_search_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        try
-        {
-            string q = e.NewTextValue;
-
-            lista.Clear();
-
-            List<Cliente> tmp = await App.Db.Search(q);
-
-            tmp.ForEach(i => lista.Add(i));
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Atenção", ex.Message, "OK");
-        }
-
     }
 
     private async void MenuItem_Clicked(object sender, EventArgs e)
@@ -66,34 +58,21 @@ public partial class ListaCLiente : ContentPage
         {
             MenuItem selecionado = sender as MenuItem;
 
-            Cliente p = selecionado.BindingContext as Cliente;
+            Cliente cliente = selecionado.BindingContext as Cliente;
 
-            bool confirm = await DisplayAlert("Tem Certeza?", $"Remover {p.Name}?", "Sim", "Não");
+            bool confirm = await DisplayAlert("Tem Certeza?", $"Remover {cliente.Name}?", "Sim", "Não");
+
             if (confirm)
             {
-                await App.Db.Delete(p.Id);
-                lista.Remove(p);
+                await App.Db.Delete(cliente.Id);
+
+                var viewModel = (ListaClienteViewModel)BindingContext;
+                viewModel.Clientes.Remove(cliente);
             }
         }
         catch (Exception ex)
         {
             await DisplayAlert("Atenção", ex.Message, "OK");
-        }
-    }
-
-    private void lst_clientes_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-        try
-        {
-            Cliente p = e.SelectedItem as Cliente;
-            Navigation.PushAsync(new Views.EditarCliente
-            {
-                BindingContext = p,
-            });
-        }
-        catch (Exception ex)
-        {
-            DisplayAlert("Atenção", ex.Message, "OK");
         }
     }
 }

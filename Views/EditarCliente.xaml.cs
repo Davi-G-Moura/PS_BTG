@@ -1,30 +1,29 @@
 using CadastroClientes.Models;
+using CadastroClientes.ViewModels;
 
 namespace CadastroClientes.Views;
 
 public partial class EditarCliente : ContentPage
 {
-	public EditarCliente()
-	{
-		InitializeComponent();
-	}
+    public EditarCliente(Cliente cliente)
+    {
+        InitializeComponent();
+
+        // Criando o ViewModel e passando o Cliente para ele
+        var viewModel = new EditarClienteViewModel(cliente);
+
+        // Definindo o BindingContext para o ViewModel
+        BindingContext = viewModel;
+    }
 
     private async void ToolbarItem_Clicked(object sender, EventArgs e)
     {
         try
         {
-            Cliente cliente_anexado = BindingContext as Cliente;
-
-            Cliente p = new Cliente
-            {
-                Id = cliente_anexado.Id,
-                Name = txt_nome.Text,
-                Lastname = txt_sobrenome.Text,
-                Age = Convert.ToInt32(txt_idade.Text),
-                Address = txt_endereco.Text,
-            };
-            await App.Db.Update(p);
+            var viewModel = (EditarClienteViewModel)BindingContext;
+            await viewModel.SalvarClienteAsync();
             await DisplayAlert("Sucesso!", "Cliente Atualizado", "OK");
+            MessagingCenter.Send(this, "AtualizarLista");
             await Navigation.PopAsync();
         }
         catch (Exception ex)

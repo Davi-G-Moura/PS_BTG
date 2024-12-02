@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CadastroClientes.Views.EditarCliente"
-             Title="{Binding Name}"
+             Title="{Binding Cliente.Name}"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ContentPage.ToolbarItems>
@@ -19,7 +19,7 @@
                    FontSize="Medium"
                    TextColor="{DynamicResource PrimaryTextColor}" />
             <Entry x:Name="txt_nome"
-                   Text="{Binding Name}"
+                   Text="{Binding Cliente.Name}"
                    Placeholder="Digite o nome"
                    PlaceholderColor="{DynamicResource PlaceholderColor}"
                    FontSize="Small"
@@ -29,7 +29,7 @@
                    FontSize="Medium"
                    TextColor="{DynamicResource PrimaryTextColor}" />
             <Entry x:Name="txt_sobrenome"
-                   Text="{Binding Lastname}"
+                   Text="{Binding Cliente.Lastname}"
                    Placeholder="Digite o sobrenome"
                    PlaceholderColor="{DynamicResource PlaceholderColor}"
                    FontSize="Small"
@@ -39,7 +39,7 @@
                    FontSize="Medium"
                    TextColor="{DynamicResource PrimaryTextColor}" />
             <Entry x:Name="txt_idade"
-                   Text="{Binding Age}"
+                   Text="{Binding Cliente.Age}"
                    Placeholder="Digite a idade"
                    PlaceholderColor="{DynamicResource PlaceholderColor}"
                    Keyboard="Numeric"
@@ -50,7 +50,7 @@
                    FontSize="Medium"
                    TextColor="{DynamicResource PrimaryTextColor}" />
             <Entry x:Name="txt_endereco"
-                   Text="{Binding Address}"
+                   Text="{Binding Cliente.Address}"
                    Placeholder="Digite o endereço"
                    PlaceholderColor="{DynamicResource PlaceholderColor}"
                    FontSize="Small"

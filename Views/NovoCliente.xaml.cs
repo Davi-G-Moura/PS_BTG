@@ -22,6 +22,7 @@ public partial class NovoCliente : ContentPage
 			};
 			await App.Db.Insert(p);
 			await DisplayAlert("Sucesso!", "Cliente Salvo", "OK");
+            MessagingCenter.Send(this, "AtualizarLista");
             await Navigation.PopAsync();
         } 
 		catch (Exception ex)

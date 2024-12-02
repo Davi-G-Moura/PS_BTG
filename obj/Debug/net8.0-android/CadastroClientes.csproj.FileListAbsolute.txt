@@ -1054,3 +1054,4 @@ C:\Users\Davi\source\repos\CadastroClientes\CadastroClientes\obj\Debug\net8.0-an
 C:\Users\Davi\source\repos\CadastroClientes\CadastroClientes\obj\Debug\net8.0-android\stamp\_GenerateJavaStubs.stamp
 C:\Users\Davi\source\repos\CadastroClientes\CadastroClientes\obj\Debug\net8.0-android\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\Davi\source\repos\CadastroClientes\CadastroClientes\obj\Debug\net8.0-android\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\Davi\source\repos\CadastroClientes\CadastroClientes\obj\Debug\net8.0-android\CadastroClientes.sourcelink.json
